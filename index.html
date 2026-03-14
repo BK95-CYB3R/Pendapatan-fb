@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaji FB iOS - SF Pro Font</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display-all" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --ios-blue: #007AFF; 
+            --ios-bg: #f2f2f7; 
+            --sf-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            --sf-text: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body { 
+            font-family: var(--sf-text); 
+            background-color: var(--ios-bg); 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 20px; 
+            letter-spacing: -0.015em; 
+        }
+
+        #card-kurs { 
+            background: white; padding: 18px; border-radius: 12px; width: 350px; 
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06); 
+        }
+        .g-text-top { 
+            font-family: var(--sf-display);
+            color: #3c4043; font-size: 14.5px; line-height: 1.25; 
+            font-weight: 400;
+        }
+        .g-val { 
+            font-family: var(--sf-display);
+            font-size: 32px; margin: 6px 0; color: #202124; 
+            letter-spacing: -1.2px; font-weight: 400; 
+        }
+        .g-unit { font-size: 22px; }
+        .g-country { font-family: var(--sf-display); font-size: 22px; color: #202124; }
+        .g-footer { font-size: 10.5px; color: #70757a; font-weight: 400; margin-top: 18px; }
+
+        #card-gaji { 
+            background: white; padding: 16px; border-radius: 16px; width: 350px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04); 
+        }
+        .rev-title { 
+            font-family: var(--sf-display);
+            font-size: 16px; margin-bottom: 10px; font-weight: 700; color: #000; 
+            letter-spacing: -0.02em;
+        }
+        .box { border: 1px solid #e5e5ea; border-radius: 14px; padding: 12px; margin-bottom: 8px; }
+        .txt-gray { color: #8e8e93; font-size: 11px; margin-bottom: 2px; font-weight: 400; }
+        .amt-big { 
+            font-family: var(--sf-display);
+            font-size: 20px; font-weight: 700; color: #000; letter-spacing: -0.4px; 
+        }
+        .status-line { display: flex; align-items: center; gap: 5px; color: #8e8e93; font-size: 11.5px; margin-top: 5px; }
+        
+        .icon-money { width: 22px; height: 22px; margin-right: 10px; object-fit: contain; }
+        .amt-small { font-weight: 600; font-size: 13px; color: #000; letter-spacing: -0.01em; }
+
+        .admin-panel { background: #1c1c1e; color: white; padding: 15px; border-radius: 12px; width: 350px; font-size: 11px; }
+        .field { margin-bottom: 12px; }
+        .field label { display: block; font-size: 9px; color: #aaa; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .admin-panel input, .admin-panel select { 
+            width: 100%; padding: 8px; border-radius: 6px; border: none; 
+            background: #2c2c2e; color: white; font-size: 12px; font-family: var(--sf-text);
+        }
+        
+        .btn-group { display: flex; gap: 8px; margin-top: 10px; }
+        .btn-ss { 
+            flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; 
+            font-weight: 700; font-size: 11px; color: white; font-family: var(--sf-display);
+        }
+        .btn-kurs { background: #34c759; }
+        .btn-gaji { background: #007aff; }
+    </style>
+</head>
+<body>
+
+    <div id="card-kurs">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div class="g-text-top"><span id="disp-usd-kurs">187</span> Dolar Amerika Serikat<br>sama dengan</div>
+            <div style="display: flex; gap: 6px;">
+                <div style="width:30px; height:30px; border:1px solid #dadce0; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#1a73e8; font-size: 11px;"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+                <div style="background:#1a73e8; color:white; padding:0 10px; border-radius:20px; display:flex; align-items:center; font-size:11px; font-weight:500; height:30px;">+ Ikuti</div>
+            </div>
+        </div>
+        <div class="g-val"><span id="disp-idr">3.167.780,00</span> <span class="g-unit">Rupiah</span></div>
+        <div class="g-country">Indonesia</div>
+        <div class="g-footer"><span id="disp-date-g">9 Mar</span>, <span id="disp-time-g">06.10</span> UTC · Dari Morningstar · Penafian</div>
+    </div>
+
+    <div id="card-gaji">
+        <h2 class="rev-title">Perkiraan pendapatan</h2>
+        <div class="box">
+            <div class="txt-gray">1 <span id="disp-curr-month">Maret</span> - <span id="disp-today">9</span></div>
+            <div class="amt-big">US$<span id="disp-usd-main">2.307,51</span></div>
+            <div class="status-line">
+                <i class="fa-solid fa-circle-check" style="color:#007aff; font-size:10px;"></i> Pembayaran diperkirakan bulan depan
+            </div>
+        </div>
+        <div class="box" style="display:flex; align-items:center; justify-content:space-between;">
+            <div style="display:flex; align-items:center;">
+                <img src="iconmoney.png" class="icon-money" alt="icon">
+                <div>
+                    <div class="txt-gray">1 <span id="disp-prev-month">Februari</span> - <span id="disp-prev-lastday">28</span></div>
+                    <div class="amt-small">US$<span id="disp-usd-prev">187,01</span> dikirim pada 21 <span id="disp-curr-short">Mar</span></div>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right" style="color:#c7c7cc; font-size:12px;"></i>
+        </div>
+    </div>
+
+    <div class="admin-panel">
+        <div class="field">
+            <label>SUMBER KURS</label>
+            <select id="in-kurs-source">
+                <option value="bawah">Gaji Bawah (USD Dikirim)</option>
+                <option value="atas">Gaji Atas (USD Perkiraan)</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>USD PERKIRAAN (ATAS)</label>
+            <input type="number" id="in-usd-main" value="2307.51" step="0.01">
+        </div>
+        <div class="field">
+            <label>USD DIKIRIM (BAWAH)</label>
+            <input type="number" id="in-usd-prev" value="187.01" step="0.01">
+        </div>
+        <div class="field">
+            <label>PILIH BULAN</label>
+            <select id="in-month">
+                <option value="0">Januari</option><option value="1">Februari</option>
+                <option value="2" selected>Maret</option><option value="3">April</option>
+                <option value="4">Mei</option><option value="5">Juni</option>
+                <option value="6">Juli</option><option value="7">Agustus</option>
+                <option value="8">September</option><option value="9">Oktober</option>
+                <option value="10">November</option><option value="11">Desember</option>
+            </select>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-ss btn-kurs" onclick="takeSS('card-kurs', 'Kurs_Google')"><i class="fa-solid fa-camera"></i> SAVE KURS</button>
+            <button class="btn-ss btn-gaji" onclick="takeSS('card-gaji', 'Gaji_FB')"><i class="fa-solid fa-camera"></i> SAVE GAJI</button>
+        </div>
+    </div>
+
+    <script>
+        const inUsdMain = document.getElementById('in-usd-main');
+        const inUsdPrev = document.getElementById('in-usd-prev');
+        const inMonth = document.getElementById('in-month');
+        const inKursSource = document.getElementById('in-kurs-source');
+
+        const bln = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const blnShort = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+
+        function update() {
+            const now = new Date();
+            const usdMain = parseFloat(inUsdMain.value) || 0;
+            const usdPrev = parseFloat(inUsdPrev.value) || 0;
+            const m = parseInt(inMonth.value);
+            const y = now.getFullYear();
+            const source = inKursSource.value;
+
+            // Update nominal gaji
+            document.getElementById('disp-usd-main').innerText = usdMain.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('disp-usd-prev').innerText = usdPrev.toLocaleString('en-US', {minimumFractionDigits: 2});
+
+            // Logika Sumber Kurs
+            let kursTarget = source === 'atas' ? usdMain : usdPrev;
+            
+            document.getElementById('disp-usd-kurs').innerText = Math.floor(kursTarget).toLocaleString('id-ID');
+            document.getElementById('disp-idr').innerText = (kursTarget * 16940).toLocaleString('id-ID', {minimumFractionDigits: 2});
+
+            // Update Tanggal & Bulan
+            document.getElementById('disp-curr-month').innerText = bln[m];
+            document.getElementById('disp-today').innerText = now.getDate();
+            const prevIdx = m === 0 ? 11 : m - 1;
+            document.getElementById('disp-prev-month').innerText = bln[prevIdx];
+            document.getElementById('disp-prev-lastday').innerText = new Date(y, prevIdx + 1, 0).getDate();
+            document.getElementById('disp-curr-short').innerText = blnShort[m];
+
+            document.getElementById('disp-date-g').innerText = `${now.getDate()} ${blnShort[m]}`;
+            document.getElementById('disp-time-g').innerText = `${now.getHours().toString().padStart(2,'0')}.${now.getMinutes().toString().padStart(2,'0')}`;
+        }
+
+        function takeSS(elementId, fileName) {
+            const element = document.getElementById(elementId);
+            html2canvas(element, {
+                backgroundColor: "#f2f2f7",
+                scale: 4,
+                useCORS: true 
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = fileName + '.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+
+        [inUsdMain, inUsdPrev, inMonth, inKursSource].forEach(el => el.addEventListener('input', update));
+        update();
+    </script>
+</body>
+</html>
